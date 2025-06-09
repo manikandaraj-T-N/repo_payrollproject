@@ -58,6 +58,14 @@ nav li a{
   color: white;
   text-decoration: none;
 }
+
+nav li a{
+    display: flex;
+    gap: 5%;
+    align-items: baseline;
+}
+
+
  header{
     display: flex;
     justify-content: center;
@@ -132,6 +140,17 @@ nav li a{
   padding: 20px;
   text-align: center;
  }
+
+.recolor {
+  width: 10%;
+    filter: brightness(0) invert(1);
+}
+
+nav li{
+    display: flex;
+    gap: 5%;
+}
+
   </style>
 
 </head>
@@ -139,9 +158,9 @@ nav li a{
 
      <nav>
     <ul>
-      <li ><a href="./overview.html">Overview</a></li>
-      <li ><a href="./payroll.html">Payroll</a></li>
-      <li class="active">Payslip</li>
+      <li ><a href="./overview.html"><i class="fa-solid fa-palette"></i>Overview</a></li>
+      <li ><i class="fa-solid fa-file-invoice-dollar"></i> <a href="./payroll.html">Payroll</a> </li>
+      <li class="active"><i class="fa-solid fa-file-invoice-dollar"></i>Payslip</li>
     </ul>
   </nav>
 
