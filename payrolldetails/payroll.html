@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>payroll</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        body{
+            display: grid;
+            grid-template-areas: "sidebar header"
+            "sidebar main";
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+
+        }
+        nav{
+            grid-area: sidebar;
+             background-color: #455A64;
+            color: white;
+            padding-top: 40px;
+        }
+
+   nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+   }     
+
+   nav li {
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+
+nav li{
+    display: flex;
+    gap: 5%;
+}
+
+
+nav li.active {
+ color: #F8CC14;
+}
+nav li a{
+  color: white;
+  text-decoration: none;
+}
+
+nav li:hover {
+  background-color: #37474F;
+}
+
+nav li a{
+    display: flex;
+    gap: 5%;
+    align-items: baseline;
+} 
+
+
+ header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    /* gap: 5%; */
+ }
+
+ header .mnth{
+    padding: 10px;
+    background-color: #455A64;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    
+ }
+
+ header .dwnld{
+    padding: 10px;
+    background-color: #F8CC14;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+ }
+
+ main{
+    padding: 10px;
+ }
+
+ form{
+    padding: 5%;
+    background-color: #FEEBAD;
+ }
+
+ .form-details{
+      display: grid;
+ grid-template-columns: 1fr 1fr 1fr;
+ }
+form section{
+    margin-top: 2%;
+}
+ form input{
+    padding: 8px;
+    background-color:#FEEBAD;
+    border: 1px solid black;
+    margin-top: 2%;
+    border-radius: 5px;
+ }
+
+ form input:focus{
+    border: 1px solid black;
+     outline: none; /* Optional: remove default blue glow */
+    transition: border-color 0.3s ease;
+ }
+
+ /* form label{
+    font-weight: bold;
+ } */
+
+/* Remove spinner in Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Remove spinner in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+form section.submit-cancel{
+    margin-top: 5%;
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+
+}
+
+form section.submit-cancel button{
+    padding: 8px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form section .submit{
+    background-color: #F8CC14;
+    color: black;
+    border: none;
+}
+
+form section .cancel{
+    background-color: #455A64;
+    color: white;
+    border: none;
+    padding: 8px 35px !important;
+}
+
+    </style>
+
+</head>
+<body>
+
+     <nav>
+    <ul>
+      <li><a href="./overview.html"><i class="fa-solid fa-palette"></i>Overview</a></li>
+      <li class="active"><i class="fa-solid fa-file-invoice-dollar"></i>Payroll</li>
+      <li><i class="fa-solid fa-file-invoice-dollar"></i> Payslip</li>
+    </ul>
+  </nav>
+
+  <main>
+    <header>
+    <h2>Payroll Details</h2>
+
+    <section class="mnth-dwnld">
+        <button class="mnth">This Month <i class="fa-solid fa-calendar-days"></i></button>
+        <button class="dwnld">Download</button>
+    </section>
+</header>
+
+<form class="content">
+    <div class="form-details">
+    <section>
+        <label for="emp-name">Employee Name</label> <br>
+        <input type="text" name="emp-name" id="emp-name" required>
+    </section>
+
+    <section>
+        <label for="emp-role">Employee Role</label> <br>
+        <input type="text" name="emp-role" id="emp-role" required>
+    </section>
+
+    <section>
+        <label for="emp-id">Employee ID</label> <br>
+        <input type="number" name="emp-id" id="emp-id" required>
+      
+
+    </section>
+
+    <section>
+        <label for="date">Date</label> <br>
+        <input type="date" name="date" id="date" required>
+    </section>
+
+     <section>
+        <label for="emp-basic-sal">Basic Salary</label> <br>
+        <input type="number" name="emp-basic-sal" id="emp-basic-sal" required>
+    </section>
+
+     <section>
+        <label for="emp-tot-sal">Total Salary</label> <br>
+        <input type="number" name="emp-tot-sal" id="emp-tot-sal" readonly>
+    </section>
+
+     <section>
+        <label for="emp-working-days">No.of Working Days</label> <br>
+        <input type="number" name="emp-working-days" id="emp-working-days" required>
+    </section>
+
+     <section>
+        <label for="emp-pres-days">Total Present Days</label> <br>
+        <input type="number" name="emp-pres-days" id="emp-pres-days" required>
+    </section>
+
+     <section>
+        <label for="emp-leave">Total Leave Days</label> <br>
+        <input type="number" name="emp-leave" id="emp-leave" readonly>
+    </section>
+
+     <section>
+        <label for="emp-addition">Additions</label> <br>
+        <input type="number" name="emp-addition" id="emp-addition" >
+    </section>
+
+     <section>
+        <label for="emp-ded">Deductions</label> <br>
+        <input type="number" name="emp-ded" id="emp-ded" readonly>
+    </section>
+
+    <section>
+        <label for="emp-original-totalsal">Original salary</label>
+        <input type="number" name="emp-original-totalsal" id="emp-original-totalsal" readonly>
+    </section>
+
+    <section>
+        <label for="totaleranings">total earnings</label>
+        <input type="number" name="totaleranings" id="total-earnings" readonly>
+    </section>
+ </div>
+
+    <section class="submit-cancel">
+        <button type="submit" class="submit" id="submit">Submit Payroll</button>
+        <button class="cancel" id="cancel">Cancel</button>
+    </section>
+
+ </form>
+  </main>
+
+ <script>
+
+
+  let empName, empRole, empId, date, empbasicSal, empTotSal;
+  let empWorkingDays, empPresDays, empLeave, empAddition, empDed,empOrigTotalSal;
+
+
+    empName = document.getElementById("emp-name").value;
+    empRole = document.getElementById("emp-role").value;
+    empId = document.getElementById("emp-id").value;
+    date = document.getElementById("date").value;
+    
+    empTotSal = document.getElementById("emp-tot-sal").value;
+    empLeave = document.getElementById("emp-leave").value;
+    empDed = document.getElementById("emp-ded").value;
+    let emptotearnings=document.getElementById("total-earnings").value;
+    empOrigTotalSal = document.getElementById("emp-original-totalsal").value;
+
+ // Convert input strings to numbers
+
+ function calculatePayroll(){
+
+    empbasicSal = parseFloat(document.getElementById("emp-basic-sal").value) || 0;
+    empWorkingDays = parseFloat(document.getElementById("emp-working-days").value) || 0;
+    empPresDays = parseFloat(document.getElementById("emp-pres-days").value) || 0;
+    empAddition = parseFloat(document.getElementById("emp-addition").value) || 0;
+
+
+    empLeave= empWorkingDays-empPresDays; 
+    document.getElementById("emp-leave").value= empLeave;
+    empDed=empLeave*empbasicSal;
+    document.getElementById("emp-ded").value =empDed ;
+    empTotSal= (empPresDays* empbasicSal)+empAddition;
+     document.getElementById("emp-tot-sal").value=empTotSal;
+
+
+ empOrigTotalSal=empbasicSal*empPresDays;
+   document.getElementById("emp-original-totalsal").value=empOrigTotalSal;
+
+     emptotearnings=empOrigTotalSal+empAddition;
+     document.getElementById("total-earnings").value=emptotearnings;
+
+
+       
+ }
+
+
+ document.getElementById("emp-basic-sal").addEventListener("input", calculatePayroll);
+ document.getElementById("emp-working-days").addEventListener("input", calculatePayroll);
+ document.getElementById("emp-pres-days").addEventListener("input", calculatePayroll);
+ document.getElementById("emp-addition").addEventListener("input", calculatePayroll);
+
+
+         document.querySelector("form").addEventListener("submit", function (e) {
+         e.preventDefault();
+  
+
+     const empData = {
+      name: document.getElementById("emp-name").value,
+      role: document.getElementById("emp-role").value,
+      id: document.getElementById("emp-id").value,
+      date: document.getElementById("date").value,
+      basicSal: document.getElementById("emp-basic-sal").value,
+
+      totalSal: document.getElementById("emp-tot-sal").value,
+
+      addition: document.getElementById("emp-addition").value,
+      deduction: document.getElementById("emp-ded").value,
+
+      totalearnings: document.getElementById("total-earnings").value,
+       
+      totalworkingdays:document.getElementById("emp-working-days").value,
+      leavedays:document.getElementById("emp-leave").value,
+      presentdays: document.getElementById("emp-pres-days").value,
+
+
+      originalsalary:document.getElementById("emp-original-totalsal").value,
+    };
+
+
+    localStorage.setItem("empPayrollData",JSON.stringify(empData));
+    window.location.href="payslip.html"
+    });
+ 
+</script>
+
+ </body>
+ </html>
