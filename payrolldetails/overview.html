@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payroll Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <style>
+    body {
+  display: grid;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+nav {
+  grid-area: sidebar;
+  background-color: #455A64;
+  color: white;
+  padding-top: 40px;
+}
+
+main {
+  grid-area: main;
+  padding: 20px;
+}
+
+header {
+  grid-area: header;
+  background-color: #FEF6D9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+/* retain your original styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+nav li.active {
+  
+  color: #F8CC14;
+}
+
+nav li:hover {
+  background-color: #37474F;
+}
+
+nav li a{
+  color: white;
+  text-decoration: none;
+}
+
+header input[type="search"] {
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+header .icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+header .icons img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+section.stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+article.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  color: black;
+  background-color: #F8CC14;
+  text-align: center;
+  font-weight: 800;
+  display: flex;
+  gap: 5%;
+  align-items: baseline;
+}
+
+article.card span i {
+  border-radius: 50%;
+  color: white !important;
+  background-color: #455A64;
+  padding: 10px;
+  text-align: center;
+}
+
+article.card p {
+  font-weight: bolder;
+}
+
+.statsandcontent {
+  background-color: #FFEEDB;
+  padding: 10px;
+}
+
+section.content {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+aside.calendar {
+  flex-grow: 1;
+}
+
+aside.meetings {
+  flex-grow: 3;
+}
+
+aside.calendar, aside.meetings {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#calendar {
+  background-color: #FEEBAD;
+  padding: 5px;
+}
+
+aside.calendar h3 {
+  margin-bottom: 10px;
+}
+
+.meeting-list {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #ff801680;
+  color: black;
+}
+
+.view-all {
+  text-align: right;
+  font-size: 0.85rem;
+  color: red;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.meeting {
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.meeting .info {
+  font-weight: 600;
+}
+
+.meeting .date {
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* FullCalendar styles */
+.fc {
+  font-size: 0.8em !important;
+}
+
+.fc table {
+  font-size: 12px;
+}
+
+.fc td {
+  padding: 0px;
+  text-align: center !important;
+}
+
+.fc .fc-daygrid-day-number {
+  padding: 0px !important;
+}
+
+.fc .fc-daygrid-day-top {
+  display: block !important;
+  flex-direction: row-reverse;
+  text-align: center !important;
+}
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+  }
+
+  nav ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 0;
+  }
+
+  nav li {
+    padding: 10px;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  section.stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  section.content {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  header input[type="search"] {
+    width: 100%;
+  }
+
+  .statsandcontent {
+    padding: 5px;
+  }
+
+  article.card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .meeting {
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .meeting .date {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  header .icons {
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  header .icons input[type="search"] {
+    width: 100%;
+  }
+
+  .meeting-list {
+    font-size: 0.85rem;
+  }
+
+  article.card {
+    font-size: 0.9rem;
+  }
+
+  .fc {
+    font-size: 0.7em !important;
+  }
+}
+
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #F8CC14;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <nav>
+    <ul>
+      <li class="active">Overview</li>
+      <li><a href="./payroll.html">Payroll</a></li>
+      <li><a href="./payslip.html">Payslip</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Header -->
+    <header>
+      <div><strong>Good Morning !!!</strong></div>
+      <div class="icons">
+        <input type="search" placeholder="Search">
+     <i class="fa-solid fa-bell" style="color: #000000;"></i>
+        <img src="images/profile photo.jpeg" alt="User" style="border-radius: 50%;">
+      </div>
+    </header>
+
+    <div class="statsandcontent">
+    <!-- Statistic Cards -->
+    <section class="stats">
+      <article class="card"><span><i class="fa-solid fa-users"></i></span> <p>Total Employees</p></article>
+      <article class="card"><span><i class="fa-solid fa-user-group"></i></span> <p>Number Of leave</p></article>
+      <article class="card"> <span><i class="fa-solid fa-user-plus"></i></span> <p>New Employee’s</p> </article>
+      <article class="card"><span><i class="fa-solid fa-plane-up"></i></span> <p>Holiday of this Year</p> </article>
+    </section>
+
+    <!-- Calendar & Meeting Section -->
+    <section class="content">
+      <!-- Calendar -->
+      <aside class="calendar">
+        <h3>Calendar</h3>
+        <div id="calendar"></div>
+      </aside>
+
+      <!-- Meetings -->
+      <aside class="meetings">
+        <h3>Upcoming Meetings</h3>
+        <div class="view-all">View All</div>
+        <div class="meeting-list">
+          <div class="meeting">
+            <div class="info">Client Meeting - 10.00 AM</div>
+            <div class="date">Wed<br>May 17</div>
+          </div>
+          <div class="meeting">
+            <div class="info">Team Meeting - 11.00 AM</div>
+            <div class="date">Wed<br>May 17</div>
+          </div>
+          <div class="meeting">
+            <div class="info">HR Interview - 2.00 PM</div>
+            <div class="date">Mon<br>May 17</div>
+          </div>
+          <div class="meeting">
+            <div class="info">Client Meeting - 4.00 PM</div>
+            <div class="date">Mon<br>May 17</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+     </div>
+  </main>
+
+  <!-- script for calendar from https://fullcalendar.io/ -->
+  <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
+
+
+  <!-- calendar script code -->
+   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+</body>
+</html>

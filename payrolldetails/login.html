@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  background: linear-gradient(to top right, #fceae8, #fbd9cd);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  max-width: 900px;
+  border-radius: 20px;
+  overflow: hidden;
+
+}
+
+.image-section {
+  flex: 1;
+  /* background: #fff; */
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.image-section img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 50%;
+}
+
+.form-section {
+  flex: 1;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+}
+
+.input-box .icon {
+  margin-right: 10px;
+}
+
+.input-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  background: transparent;
+}
+
+input::placeholder{
+    color: black;
+}
+
+.forgot {
+  text-align: right;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.forgot a {
+  text-decoration: none;
+  color: black;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #f8c601;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #e6b800;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-section, .image-section {
+    padding: 20px;
+  }
+
+  .form-section h2 {
+    text-align: center;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="image-section">
+      <img src="./Payslip Images/loginLogo. Gif.gif" alt="Login Illustration">
+    </div>
+
+    <div class="form-section">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+          <input id="username" type="text" placeholder="Enter your Name" required>
+        </div>
+
+        <div class="input-box">
+          <span class="icon"><i class="fa-solid fa-lock"></i></span>
+          <input id="password" type="password" placeholder="Password" required>
+        </div>
+
+        <div class="forgot">
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+           <p id="error-message" class="error"></p>
+      </form>
+    </div>
+  </div>
+
+<script>
+  document.getElementById("loginForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // prevent form submission
+
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const errorMsg = document.getElementById("error-message");
+
+  if (!username || !password) {
+    errorMsg.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  if (username === "manikandaraj" && password === "Mani@97") {
+    errorMsg.style.color = "green";
+    errorMsg.textContent = "Login successful!";
+    
+    setTimeout(() => {
+      window.location.href = "overview.html";
+    }, 1000);
+  } else {
+    errorMsg.style.color = "red";
+    errorMsg.textContent = "Invalid username or password.";
+  }
+});
+
+</script>
+
+</body>
+</html>
