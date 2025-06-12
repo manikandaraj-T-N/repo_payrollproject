@@ -326,8 +326,8 @@ form section .cancel{
         <input type="number" name="emp-original-totalsal" id="emp-original-totalsal" readonly>
     </section>
 
-    <section style="display: none;">
-        <label for="totaleranings">total earnings</label>
+    <section style="display: block;">
+        <label for="totaleranings">Total earnings</label>
         <input type="number" name="totaleranings" id="total-earnings" readonly>
     </section>
  </div>
@@ -372,7 +372,7 @@ form section .cancel{
     document.getElementById("emp-leave").value= empLeave;
     empDed=empLeave*empbasicSal;
     document.getElementById("emp-ded").value =empDed ;
-    empTotSal= (empPresDays* empbasicSal)+empAddition;
+    empTotSal= (empPresDays* empbasicSal);
      document.getElementById("emp-tot-sal").value=empTotSal;
 
 
