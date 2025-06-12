@@ -293,7 +293,63 @@ document.getElementById("slip-originaltotal-sal").textContent=empData.originalsa
 </script>
 
 
+<!--  dynamically download name of pdf file    -->
 <script>
+  document.getElementById("download").addEventListener("click", function () {
+    const element = document.querySelector(".payslip-data");
+    const buttons = document.querySelector(".save-download");
+
+    // Hide buttons temporarily
+    buttons.style.display = "none";
+
+    // Create temporary heading
+    const heading = document.createElement("h1");
+    heading.textContent = "Payslip";
+    heading.style.textAlign = "center";
+    heading.style.marginBottom = "5%";
+    heading.style.fontSize = "24px";
+    heading.style.color = "#000";
+    element.insertBefore(heading, element.firstChild);
+
+    // Get employee name and month from localStorage
+    const empData = JSON.parse(localStorage.getItem("empPayrollData"));
+    let fileName = "payslip.pdf"; // default fallback
+
+    if (empData) {
+      const empName = empData.name?.trim().replace(/\s+/g, "_") || "Employee";
+      const dateObj = new Date(empData.date);
+      const monthName = dateObj.toLocaleString("default", { month: "long" });
+      fileName = `${empName}_${monthName}.pdf`;
+    }
+
+    html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgPdfWidth = imgWidth * ratio;
+      const imgPdfHeight = imgHeight * ratio;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, imgPdfWidth, imgPdfHeight);
+      pdf.save(fileName); //dynamic name used here
+
+      // Restore UI
+      element.removeChild(heading);
+      buttons.style.display = "flex";
+    });
+  });
+</script>
+
+
+
+<!--     normal download pdf -->
+<!-- <script>
   document.getElementById("download").addEventListener("click", function () {
     const element = document.querySelector(".payslip-data");
     const buttons = document.querySelector(".save-download");
@@ -332,7 +388,7 @@ document.getElementById("slip-originaltotal-sal").textContent=empData.originalsa
       buttons.style.display = "flex";
     });
   });
-</script>
+</script> -->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
